@@ -1,0 +1,59 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/util
+                           http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="citizen" class="com.epam.brest.spring.Citizen" scope="prototype">
+        <!--<property name="head" ref="blueHead"/>-->
+        <!--<property name="leg" ref="blueLeg"/>-->
+    </bean>
+
+    <bean id="superMan" class="com.epam.brest.spring.SuperMan">
+        <!--<property name="head" ref="blueHead"/>-->
+        <!--<property name="leg" ref="blueLeg"/>-->
+    </bean>
+
+    <bean id="javaDev" class="com.epam.brest.spring.Developer">
+        <property name="name" value="Dmitry"/>
+        <property name="skill" value="java"/>
+        <property name="likeCoffe" value="true"/>
+        <property name="workPlace" value="Brest"/>
+    </bean>
+    <bean id="javaDev1" class="com.epam.brest.spring.Developer">
+        <constructor-arg name="name" value="Make"/>
+        <constructor-arg name="likeCoffe" value="true"/>
+        <constructor-arg name="skill" value="Java"/>
+        <constructor-arg name="workPlace" value="Vitebsk"/>
+    </bean>
+    <bean id="manager" class="com.epam.brest.spring.Manager">
+        <constructor-arg name="name" value="Dima"/>
+        <property name="emailAdresses" ref="emailAdresses"/>
+    </bean>
+
+    <bean id="progect" class="com.epam.brest.spring.Progect" scope="singleton" lazy-init="true">
+        <constructor-arg name="name" value="GoogleMaps"/>
+        <constructor-arg name="manager" ref="manager"/>
+    </bean>
+
+    <util:list id="emailAdresses" list-class="java.util.ArrayList">
+        <value>someone@mail.com</value>
+        <value>someelse@mail.com</value>
+    </util:list>
+    <bean id="manager2" class="com.epam.brest.spring.Manager" scope="singleton">
+        <constructor-arg name="name" value="Dima2"/>
+        <property name="emailAdresses">
+            <list>
+            <value type="java.lang.String">email1</value>
+            <value>email2</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="singelton" class="com.epam.brest.spring.Singelton"
+    factory-method="getInstance"/>
+
+</beans>
